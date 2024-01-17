@@ -4,20 +4,6 @@
 import AppHTTPRequests from 'AppHTTPRequests';
 
 export const App = () => {
-  // const [trending, setTrending] = useState(null);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const trendingData = await getTrending();
-  //       setTrending(trendingData);
-  //     } catch (error) {
-  //       console.error('Error fetching trending movies:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
   return (
     <div>
       <AppHTTPRequests />

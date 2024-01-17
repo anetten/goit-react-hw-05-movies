@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { getMovieCredits } from 'movieAPI';
+import { useParams } from 'react-router-dom';
 
-const CastDetails = ({ movieId }) => {
-  const [castDetails, setCastDetails] = useState([]);
+const Cast = () => {
+  const [cast, setCast] = useState([]);
+  const { postId } = useParams(null);
 
   useEffect(() => {
     const fetchMovieCredits = async () => {
       try {
-        const credits = await getMovieCredits(movieId);
-        setCastDetails(credits.cast);
+        const credits = await getMovieCredits(postId);
+        setCast(credits.cast);
       } catch (error) {
         console.error('Error fetching movie credits:', error);
       }
     };
 
-    if (movieId) {
+    if (postId) {
       fetchMovieCredits();
     }
-  }, [movieId]);
+  }, [postId]);
 
-  if (!castDetails) {
+  if (!postId) {
     return <div>No cast information available</div>;
   }
 
   return (
     <div>
-      <h3>Cast</h3>
       <ul>
-        {castDetails.map(member => (
+        {cast.map(member => (
           <li key={member.id}>
             <img
               src={`https://image.tmdb.org/t/p/w200${
@@ -44,4 +45,4 @@ const CastDetails = ({ movieId }) => {
   );
 };
 
-export default CastDetails;
+export default Cast;

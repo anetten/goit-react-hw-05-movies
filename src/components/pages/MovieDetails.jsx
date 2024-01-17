@@ -1,9 +1,6 @@
 import { getMovieDetails } from 'movieAPI';
 import React, { useEffect, useState } from 'react';
-import { NavLink, Route, Routes, useParams } from 'react-router-dom';
-
-import Cast from './Cast';
-import Reviews from './Reviews';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 
 import css from './MovieDetails.module.css';
 
@@ -65,10 +62,7 @@ const MovieDetails = () => {
           Reviews
         </NavLink>
         <div>
-          <Routes>
-            <Route path="cast" element={<Cast postId={postId} />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Routes>
+          <Outlet />
         </div>
       </div>
     </div>

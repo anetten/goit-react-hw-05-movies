@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getsearchMovies } from 'movieAPI';
+import { Link } from 'react-router-dom';
 
 const SearchMovie = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,7 +28,9 @@ const SearchMovie = () => {
       {searchResults ? (
         <ul>
           {searchResults.results.map(movie => (
-            <li key={movie.id}>{movie.title}</li>
+            <Link to={`/movies/${movie.id}`} key={movie.id}>
+              {movie.title}
+            </Link>
           ))}
         </ul>
       ) : (

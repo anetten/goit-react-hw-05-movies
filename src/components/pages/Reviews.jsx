@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { getMovieReviews } from 'movieAPI';
+import { useParams } from 'react-router-dom';
 
-const Reviews = ({ movieId }) => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const { postId } = useParams();
 
   useEffect(() => {
     const fetchMovieReviews = async () => {
       try {
-        const response = await getMovieReviews(movieId);
+        const response = await getMovieReviews(postId);
         setReviews(response.results);
       } catch (error) {
         console.error('Error fetching movie reviews:', error);
       }
     };
 
-    if (movieId) {
+    if (postId) {
       fetchMovieReviews();
     }
-  }, [movieId]);
+  }, [postId]);
 
-  if (!reviews) {
+  if (!postId) {
     return <div>No reviews available</div>;
   }
 
   return (
     <div>
-      <h3>Reviews</h3>
       <ul>
         {reviews.map(review => (
           <li key={review.id}>
