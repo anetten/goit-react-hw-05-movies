@@ -1,12 +1,20 @@
 import { getMovieDetails } from 'movieAPI';
-import React, { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
 import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const { postId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? '/home');
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -28,6 +36,7 @@ const MovieDetails = () => {
 
   return (
     <div>
+      <Link to={backLinkRef.current}>Go back</Link>
       <div className={css.container}>
         <img src={posterUrl} alt={movieDetails.title} height="550" />
         <div className={css.details_container}>

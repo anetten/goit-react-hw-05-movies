@@ -1,15 +1,15 @@
-import React from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getTrending } from 'movieAPI';
 
-import css from 'AppHTTPRequests.module.css';
+import Layout from 'components/Layout/Layout';
 
-import Home from 'components/pages/Home';
-import MovieDetails from 'components/pages/MovieDetails';
-import Movies from 'components/pages/Movies';
-import Cast from 'components/pages/Cast';
-import Reviews from 'components/pages/Reviews';
+const Home = lazy(() => import('components/pages/Home'));
+const MovieDetails = lazy(() => import('components/pages/MovieDetails'));
+const Movies = lazy(() => import('components/pages/Movies'));
+const Cast = lazy(() => import('components/pages/Cast'));
+const Reviews = lazy(() => import('components/pages/Reviews'));
 
 export default function AppHTTPRequests() {
   const [trending, setTrending] = useState(null);
@@ -27,26 +27,8 @@ export default function AppHTTPRequests() {
     fetchData();
   }, []);
   return (
-    <div>
-      <header className={css.header}>
-        <NavLink
-          className={({ isActive }) =>
-            `${css.navLink} ${isActive ? css.active : ''}`
-          }
-          to="/"
-        >
-          Home
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            `${css.navLink} ${isActive ? css.active : ''}`
-          }
-          to="/movies"
-        >
-          Movies
-        </NavLink>
-      </header>
-      <main className={css.main}>
+    <Layout>
+      <Suspense>
         <Routes>
           <Route path="/" element={<Home trending={trending} />} />
           <Route path="/movies" element={<Movies />} />
@@ -55,7 +37,7 @@ export default function AppHTTPRequests() {
             <Route path="reviews" element={<Reviews />} />
           </Route>
         </Routes>
-      </main>
-    </div>
+      </Suspense>
+    </Layout>
   );
 }

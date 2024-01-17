@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const HomePage = ({ trending }) => {
+  const location = useLocation();
   if (!trending) {
     return <div>Loading..</div>;
   } else {
@@ -11,7 +12,9 @@ const HomePage = ({ trending }) => {
         <ul>
           {trending.results.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <Link state={{ from: location }} to={`/movies/${movie.id}`}>
+                {movie.title}
+              </Link>
             </li>
           ))}
         </ul>

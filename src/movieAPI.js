@@ -20,9 +20,11 @@ export const getTrending = async () => {
   }
 };
 
-export const getsearchMovies = async () => {
+export const getsearchMovies = async searchTerm => {
   try {
-    const response = await axios.get(`${BASE_URL}/search/movie`);
+    const response = await axios.get(
+      `${BASE_URL}/search/movie?query=${searchTerm}`
+    );
     return response.data;
   } catch (error) {
     console.error(error);

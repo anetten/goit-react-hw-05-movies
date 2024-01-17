@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { getsearchMovies } from 'movieAPI';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const SearchMovie = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState(null);
+  const location = useLocation();
 
   const handleSearch = async () => {
     try {
@@ -28,9 +29,11 @@ const SearchMovie = () => {
       {searchResults ? (
         <ul>
           {searchResults.results.map(movie => (
-            <Link to={`/movies/${movie.id}`} key={movie.id}>
-              {movie.title}
-            </Link>
+            <li key={movie.id}>
+              <Link state={{ from: location }} to={`/movies/${movie.id}`}>
+                {movie.title}
+              </Link>
+            </li>
           ))}
         </ul>
       ) : (
