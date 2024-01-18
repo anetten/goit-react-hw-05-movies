@@ -1,12 +1,6 @@
 import { getMovieDetails } from 'movieAPI';
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 import css from './MovieDetails.module.css';
 
@@ -54,7 +48,19 @@ const MovieDetails = () => {
       </div>
       <div className={css.info_container}>
         <h3 className={css.info_title}>Additional information</h3>
-        <NavLink
+        <ul>
+          <li>
+            <Link to="cast" state={{ from: backLinkRef }}>
+              Cast
+            </Link>
+          </li>
+          <li>
+            <Link to="reviews" state={{ from: backLinkRef }}>
+              Reviews
+            </Link>
+          </li>
+        </ul>
+        {/* <NavLink
           className={({ isActive }) =>
             `${css.navLink} ${isActive ? css.active : ''}`
           }
@@ -69,7 +75,7 @@ const MovieDetails = () => {
           to="reviews"
         >
           Reviews
-        </NavLink>
+        </NavLink> */}
         <div>
           <Outlet />
         </div>
