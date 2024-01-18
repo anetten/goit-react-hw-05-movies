@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { getsearchMovies } from 'movieAPI';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const SearchMovie = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState(null);
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get('sQuery');
 
   const handleSearch = async () => {
     try {
@@ -14,17 +17,31 @@ const SearchMovie = () => {
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
+
+    setSearchParams({
+      sQuery: searchTerm,
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    handleSearch();
   };
 
   return (
     <div>
       <h3>Search Movies</h3>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          defaultValue={query}
+          onChange={e => setSearchTerm(e.target.value)}
+          required
+        />
+        <button type="submit" onClick={handleSearch}>
+          Search
+        </button>
+      </form>
 
       {searchResults ? (
         <ul>
