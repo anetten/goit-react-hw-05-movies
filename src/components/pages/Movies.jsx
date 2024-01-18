@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getsearchMovies } from 'movieAPI';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const SearchMovie = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState(null);
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const location = useLocation();
+
   const query = searchParams.get('sQuery');
+  const [searchTerm, setSearchTerm] = useState(query ?? '');
 
   const handleSearch = async () => {
     try {
@@ -27,6 +28,13 @@ const SearchMovie = () => {
     e.preventDefault();
     handleSearch();
   };
+
+  useEffect(() => {
+    if (query) {
+      // setSearchTerm(query);
+      handleSearch();
+    }
+  }, [query]);
 
   return (
     <div>

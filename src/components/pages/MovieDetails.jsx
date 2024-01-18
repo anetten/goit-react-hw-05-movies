@@ -7,6 +7,7 @@ import css from './MovieDetails.module.css';
 const MovieDetails = () => {
   const { postId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+
   const location = useLocation();
   const backLinkRef = useRef(location.state?.from ?? '/home');
 
