@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getsearchMovies } from 'movieAPI';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const SearchMovie = () => {
   const query = searchParams.get('sQuery');
   const [searchTerm, setSearchTerm] = useState(query ?? '');
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     try {
       const searchResultData = await getsearchMovies(searchTerm);
       setSearchResults(searchResultData);
@@ -22,7 +22,7 @@ const SearchMovie = () => {
     setSearchParams({
       sQuery: searchTerm,
     });
-  };
+  }, [searchTerm, setSearchParams]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const SearchMovie = () => {
       // setSearchTerm(query);
       handleSearch();
     }
-  }, [query]);
+  }, [query, handleSearch]);
 
   return (
     <div>
