@@ -5,11 +5,11 @@ import { getTrending } from 'movieAPI';
 
 import Layout from 'components/Layout/Layout';
 
-const Home = lazy(() => import('components/pages/Home'));
-const MovieDetails = lazy(() => import('components/pages/MovieDetails'));
-const Movies = lazy(() => import('components/pages/Movies'));
-const Cast = lazy(() => import('components/pages/Cast'));
-const Reviews = lazy(() => import('components/pages/Reviews'));
+const Home = lazy(() => import('pages/Home'));
+const MovieDetails = lazy(() => import('pages/MovieDetails'));
+const Movies = lazy(() => import('pages/Movies'));
+const Cast = lazy(() => import('pages/Cast'));
+const Reviews = lazy(() => import('pages/Reviews'));
 
 export default function AppHTTPRequests() {
   const [trending, setTrending] = useState(null);

@@ -51,17 +51,15 @@ const MovieDetails = () => {
         <h3 className={css.info_title}>Additional information</h3>
         <ul>
           <li>
-            <Link to="cast" state={{ from: backLinkRef }}>
-              Cast
-            </Link>
+            <Link to="cast">Cast</Link>
           </li>
           <li>
-            <Link to="reviews" state={{ from: backLinkRef }}>
-              Reviews
-            </Link>
+            <Link to="reviews">Reviews</Link>
           </li>
         </ul>
         {/* <NavLink
+        state={{ from: backLinkRef }}
+         state={{ from: backLinkRef }}
           className={({ isActive }) =>
             `${css.navLink} ${isActive ? css.active : ''}`
           }
