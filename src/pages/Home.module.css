@@ -1,0 +1,20 @@
+.container {
+  background-color: #bfb0bf;
+  padding: 30px;
+}
+
+.title {
+  margin: 0;
+  padding: 30px;
+  padding-left: 130px;
+  color: #2d252d;
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  list-style-type: none;
+  padding-left: 0;
+}

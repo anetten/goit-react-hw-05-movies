@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 import css from './MovieDetails.module.css';
+import Loading from 'components/loader/loader';
 
 const MovieDetails = () => {
   const { postId } = useParams();
@@ -25,21 +26,25 @@ const MovieDetails = () => {
   }, [postId]);
 
   if (!movieDetails) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   const posterUrl = `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`;
 
   return (
     <div>
-      <Link to={backLinkRef.current}>Go back</Link>
+      <Link to={backLinkRef.current} className={css.backLink}>
+        Go back
+      </Link>
       <div className={css.container}>
         <img src={posterUrl} alt={movieDetails.title} height="550" />
         <div className={css.details_container}>
           <h2 className={css.movie_title}>{movieDetails.title}</h2>
-          <p>User Score: {movieDetails.vote_average}%</p>
-          <h3>Overview</h3>
-          <p>{movieDetails.overview}</p>
-          <h3>Genres</h3>
+          <p className={css.paragraph}>
+            User Score: {movieDetails.vote_average}%
+          </p>
+          <h3 className={css.sub_title}>Overview</h3>
+          <p className={css.paragraph}>{movieDetails.overview}</p>
+          <h3 className={css.sub_title}>Genres</h3>
           <ul className={css.genre_list}>
             {movieDetails.genres.map(genre => (
               <li key={genre.id}>{genre.name}</li>
@@ -49,32 +54,18 @@ const MovieDetails = () => {
       </div>
       <div className={css.info_container}>
         <h3 className={css.info_title}>Additional information</h3>
-        <ul>
+        <ul className={css.extra}>
           <li>
-            <Link to="cast">Cast</Link>
+            <Link className={css.extra_link} to="cast">
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <Link className={css.extra_link} to="reviews">
+              Reviews
+            </Link>
           </li>
         </ul>
-        {/* <NavLink
-        state={{ from: backLinkRef }}
-         state={{ from: backLinkRef }}
-          className={({ isActive }) =>
-            `${css.navLink} ${isActive ? css.active : ''}`
-          }
-          to="cast"
-        >
-          Cast
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            `${css.navLink} ${isActive ? css.active : ''}`
-          }
-          to="reviews"
-        >
-          Reviews
-        </NavLink> */}
         <div>
           <Outlet />
         </div>

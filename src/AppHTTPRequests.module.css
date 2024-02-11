@@ -1,6 +1,6 @@
 .header {
-  border-bottom: 1px solid rgb(80, 80, 80);
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.3);
+  background-color: #a690a4;
 }
 
 .navLink {
@@ -9,16 +9,17 @@
   font-size: 30px;
   font-weight: 600;
   text-decoration: none;
-  color: inherit;
+  color: #2d252d;
 }
 
 .active {
-  color: rgb(71, 116, 180);
+  color: #d1c7cd;
 }
 
 .main {
-  padding: 45px;
   font-size: 30px;
   font-weight: 600;
   text-decoration: none;
+  background-color: #bfb0bf;
+  height: 100%;
 }

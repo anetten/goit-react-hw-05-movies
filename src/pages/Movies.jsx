@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { getsearchMovies } from 'movieAPI';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import css from './Movies.module.css';
+import MovieCard from 'components/card/MovieCard';
 
 const SearchMovie = () => {
   const [searchResults, setSearchResults] = useState(null);
@@ -31,15 +33,14 @@ const SearchMovie = () => {
 
   useEffect(() => {
     if (query) {
-      // setSearchTerm(query);
       handleSearch();
     }
   }, [query, handleSearch]);
 
   return (
-    <div>
-      <h3>Search Movies</h3>
-      <form onSubmit={handleSubmit}>
+    <div className={css.container}>
+      <h3 className={css.title}>Search Movies🔍</h3>
+      <form className={css.form} onSubmit={handleSubmit}>
         <input
           type="text"
           defaultValue={query}
@@ -52,17 +53,15 @@ const SearchMovie = () => {
       </form>
 
       {searchResults ? (
-        <ul>
+        <ul className={css.cardList}>
           {searchResults.results.map(movie => (
             <li key={movie.id}>
-              <Link state={{ from: location }} to={`/movies/${movie.id}`}>
-                {movie.title}
-              </Link>
+              <MovieCard movie={movie} location={location} />
             </li>
           ))}
         </ul>
       ) : (
-        <p>No search results yet.</p>
+        <p className={css.noSearch}>No search results yet.</p>
       )}
     </div>
   );

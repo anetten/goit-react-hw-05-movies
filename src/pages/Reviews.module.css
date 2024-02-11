@@ -1,0 +1,22 @@
+.reviews_list {
+  list-style-type: none;
+}
+
+.reviews_item {
+  border: 1px solid #dbd2d7;
+  background-color: #dbd2d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.reviews_author {
+  color: #221c22;
+  font-size: 20px;
+}
+
+.reviews_content {
+  color: #2d252d;
+  font-size: 18px;
+}
